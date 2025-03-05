@@ -222,12 +222,12 @@ export default function TblDivision({ dividend, divisor }: Props) {
                         {
                           (level === 0 && first.zeros === 0 ? str0 : str1.slice(0, -first.zeros || 100)).split("")
                             .map((item: string, index: number) => (
-                              <td key={`DFD.${index}`} className="first">{item}</td>
+                              <td key={`DFD.${index}`} className="first" data-root={`${first.root}`}>{item}</td>
                             ))
                         }
                         {
                           zeros.split("").map((_, index: number) => (
-                            <td key={`DFZ.${index}`} className="zero">0</td>
+                            <td key={`DFZ.${index}`} className="zero" data-root={`${first.root}`}>0</td>
                           ))
                         }
                         {
@@ -257,7 +257,7 @@ export default function TblDivision({ dividend, divisor }: Props) {
 
                           {
                             str2.split("").map((item: string, index:number) => (
-                              <td key={`DSD.${index}`} className="second">{item}</td>
+                              <td key={`DSD.${index}`} className="second" data-root={`${second!.root}`}>{item}</td>
                             ))
                           }
                         </tr>

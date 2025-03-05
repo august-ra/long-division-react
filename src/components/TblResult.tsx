@@ -26,7 +26,7 @@ function TblResult({ divisor, quotient, periodic }: Props) {
     <table className="result">
       <tbody>
       <tr>
-        <td>{divisor}</td>
+        <td data-root={`${calcDigitalRoot(divisor)}`}>{divisor}</td>
       </tr>
       <tr>
         <td className="result" dangerouslySetInnerHTML={{ __html: result }} />
