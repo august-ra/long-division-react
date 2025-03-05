@@ -1,6 +1,8 @@
 import React, { useState } from "react"
 import "./App.css"
 
+import TblDivision from "./components/TblDivision"
+
 
 export default function App() {
   const [dividend, setDividend] = useState<number>(1)
@@ -22,6 +24,8 @@ export default function App() {
       </div>
 
       <div className="empty" />
+
+      <TblDivision />
     </>
   )
 }
