@@ -4,6 +4,7 @@ export interface IOperationData {
   pairs:     StepInfo[]
   results:   Record<number, number>
   quotient:  string
+  periodic:  string
 }
 
 
@@ -17,6 +18,7 @@ export interface StepInfo {
   first:    NumberInfo
   second:   NumberInfo | null
   quotient: number
+  periodic: boolean
   output:   number
 }
 
@@ -31,5 +33,6 @@ export const emptyLastStep: StepInfo = {
   first:    { ...emptyNumber },
   second:   null,
   quotient: 0,
+  periodic: false,
   output:   0,
 }
