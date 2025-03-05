@@ -22,3 +22,29 @@ export function setNumberInfo(info: NumberInfo, value: number, zeros: number = 0
   info.zeros = zeros
   info.count = String(value).length
 }
+
+
+export function calcUnits(value: number, unit_0: string, unit_1: string, unit_2: string): string {
+  let reminder: number = value % 100
+
+  if (reminder >= 11 && reminder <= 19)
+    return unit_0
+
+  reminder = reminder % 10
+
+  if (reminder === 1)
+    return unit_1
+  else if (reminder >= 2 && reminder <= 4)
+    return unit_2
+  else
+    return unit_0
+}
+
+
+export function calcSumOfDigits(digits: string): number {
+  return digits.split("").reduce((acc: number, digit: string) => acc + Number(digit), 0)
+}
+
+export function calcDigitalRoot(value: number): number {
+  return value % 9 || 9
+}
