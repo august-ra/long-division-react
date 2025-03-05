@@ -25,7 +25,7 @@ export default function App() {
 
       <div className="empty" />
 
-      <TblDivision />
+      <TblDivision dividend={dividend} divisor={divisor} />
     </>
   )
 }
