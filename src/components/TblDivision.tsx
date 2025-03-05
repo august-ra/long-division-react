@@ -221,8 +221,17 @@ export default function TblDivision({ dividend, divisor }: Props) {
 
                         {
                           (level === 0 && first.zeros === 0 ? str0 : str1.slice(0, -first.zeros || 100)).split("")
-                            .map((item: string, index: number) => (
-                              <td key={`DFD.${index}`} className="first" data-root={`${first.root}`}>{item}</td>
+                            .map((item: string, index: number, array: string[]) => (
+                              level === 0 && index === array.length - 1 && zeros
+                                ? (
+                                  <td key={`DFD.${index}`} className="first" data-root={`${first.root}`}>
+                                    {item}
+                                    <div className="dot">.</div>
+                                  </td>
+                                )
+                                : (
+                                  <td key={`DFD.${index}`} className="first" data-root={`${first.root}`}>{item}</td>
+                                )
                             ))
                         }
                         {
