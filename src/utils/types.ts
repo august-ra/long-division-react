@@ -11,6 +11,7 @@ export interface IOperationData {
 export interface NumberInfo {
   value: number
   zeros: number
+  root:  number
   count: number
 }
 
@@ -26,6 +27,7 @@ export interface StepInfo {
 export const emptyNumber: NumberInfo = {
   value: 0,
   zeros: 0,
+  root:  0,
   count: 0,
 }
 

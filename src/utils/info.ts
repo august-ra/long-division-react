@@ -20,6 +20,7 @@ export function getLastStepInfo(first: number): StepInfo {
 export function setNumberInfo(info: NumberInfo, value: number, zeros: number = 0) {
   info.value = value
   info.zeros = zeros
+  info.root  = calcDigitalRoot(value)
   info.count = String(value).length
 }
 

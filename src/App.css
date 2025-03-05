@@ -42,6 +42,16 @@
   table {
     border-spacing: 0;
 
+    &.digital-roots {
+      td:first-child {
+        color: gray;
+      }
+
+      td:last-child {
+        text-align: center;
+      }
+    }
+
     &.result {
       position: absolute;
 
@@ -59,6 +69,10 @@
         }
       }
     }
+  }
+
+  tr.second td:not(.second) {
+    border-bottom: 1px dotted darkgreen;
   }
 
   td {

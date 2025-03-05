@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react"
 
 import TblResult from "./TblResult"
+import TblRoots from "./TblRoots"
 
-import { fillStepInfo, getLastStepInfo } from "../utils/info"
+import { calcDigitalRoot, fillStepInfo, getLastStepInfo } from "../utils/info"
 import { emptyNumber } from "../utils/types"
 import type { IOperationData, NumberInfo, StepInfo } from "../utils/types"
 
@@ -106,6 +107,9 @@ export default function TblDivision({ dividend, divisor }: Props) {
 
       fillStepInfo(stepInfo, first, zeros + 1, second, quotient, false, output)
 
+      if (step === 0)
+        stepInfo.first.root = calcDigitalRoot(dividend)
+
       data.pairs.push(stepInfo)
 
       first = output
@@ -165,6 +169,10 @@ export default function TblDivision({ dividend, divisor }: Props) {
     <table className="division">
       <tbody>
         <tr>
+          <td>
+            <TblRoots pairs={data.pairs} />
+          </td>
+
           <td>
             <table>
               <tbody>
