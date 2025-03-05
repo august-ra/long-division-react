@@ -41,6 +41,20 @@
 
   table {
     border-spacing: 0;
+
+    &.result {
+      position: absolute;
+
+      td {
+        text-align: left;
+        border-left: 1px solid #ffffffdd;
+
+        &.result {
+          border-top: 1px solid #ffffffdd;
+          text-wrap: nowrap;
+        }
+      }
+    }
   }
 
   td {

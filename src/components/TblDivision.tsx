@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react"
 
+import TblResult from "./TblResult"
+
 import { fillStepInfo, getLastStepInfo } from "../utils/info"
 import { emptyNumber } from "../utils/types"
 import type { IOperationData, NumberInfo, StepInfo } from "../utils/types"
@@ -144,6 +146,18 @@ export default function TblDivision({ dividend, divisor }: Props) {
           <td>
             <table>
               <tbody>
+                <tr>
+                  <td>&nbsp;</td>
+                  {
+                    Array.from({ length: data.pairs[0].first.count + 1 }).map((_, index: number) => (
+                      <td key={`DH.${index}`} />
+                    ))
+                  }
+                  <td rowSpan={2}>
+                    <TblResult divisor={divisor} quotient={data.quotient} />
+                  </td>
+                </tr>
+
                 {
                   data.pairs.map((pair: StepInfo, level: number) => {
                     const first:  NumberInfo        = pair.first
@@ -206,8 +220,8 @@ export default function TblDivision({ dividend, divisor }: Props) {
                           }
 
                           {
-                            Array.from({ length: offset2 }).map((_) => (
-                              <td className="second" />
+                            Array.from({ length: offset2 }).map((_, index: number) => (
+                              <td key={`DSZ.${index}`} className="second" />
                             ))
                           }
 
