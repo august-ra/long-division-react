@@ -31,6 +31,14 @@ export const emptyNumber: NumberInfo = {
   count: 0,
 }
 
+export const emptyUsualStep: StepInfo = {
+  first:    { ...emptyNumber },
+  second:   { ...emptyNumber },
+  quotient: 0,
+  periodic: false,
+  output:   0,
+}
+
 export const emptyLastStep: StepInfo = {
   first:    { ...emptyNumber },
   second:   null,
