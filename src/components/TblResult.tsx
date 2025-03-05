@@ -4,9 +4,17 @@ import React from "react"
 interface Props {
   divisor:  number
   quotient: string
+  periodic: string
 }
 
-function TblResult({ divisor, quotient }: Props) {
+function TblResult({ divisor, quotient, periodic }: Props) {
+  const result: string = (() => {
+    if (periodic)
+      return quotient.replace(periodic, `(<span class="periodic">${periodic}</span>)`)
+    else
+      return quotient
+  })()
+
   return (
     <table className="result">
       <tbody>
@@ -14,7 +22,7 @@ function TblResult({ divisor, quotient }: Props) {
         <td>{divisor}</td>
       </tr>
       <tr>
-        <td className="result">{quotient}</td>
+        <td className="result" dangerouslySetInnerHTML={{ __html: result }} />
       </tr>
       </tbody>
     </table>

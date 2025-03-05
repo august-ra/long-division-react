@@ -52,6 +52,10 @@
         &.result {
           border-top: 1px solid #ffffffdd;
           text-wrap: nowrap;
+
+          .periodic {
+            color: lightsalmon;
+          }
         }
       }
     }

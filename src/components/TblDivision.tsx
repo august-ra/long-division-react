@@ -18,6 +18,7 @@ export default function TblDivision({ dividend, divisor }: Props) {
     pairs:     [],
     results:   {},
     quotient:  "",
+    periodic:  "",
   })
 
   const [mark, update] = useState<number>(0)
@@ -32,6 +33,7 @@ export default function TblDivision({ dividend, divisor }: Props) {
     data.pairs     = []
     data.results   = {}
     data.quotient  = ""
+    data.periodic  = ""
 
     if (dividend === 0 || divisor === 0)
       return
@@ -54,6 +56,7 @@ export default function TblDivision({ dividend, divisor }: Props) {
         first:    { ...emptyNumber },
         second:   { ...emptyNumber },
         quotient: 1,
+        periodic: false,
         output:   0,
       }
 
@@ -112,10 +115,29 @@ export default function TblDivision({ dividend, divisor }: Props) {
       } else if (first === 0) {
         const stepInfo: StepInfo = getLastStepInfo(first)
         data.pairs.push(stepInfo)
+        data.periodic = ""
 
         break
       } else if (data.results[first] >= 0) {
         step = data.results[first]
+
+        data.pairs[step].periodic = true
+        data.periodic = data.pairs.reduce((acc: string, item: StepInfo, index: number) => {
+          if (index < step)
+            return ""
+
+          let zeros: number
+
+          if (index === step)
+            zeros = item.first.count - String(first).length - 1
+          else
+            zeros = item.first.zeros - 1
+
+          if (zeros > 0)
+            return acc + "0".repeat(zeros) + item.quotient
+          else
+            return acc + item.quotient
+        }, "")
 
         const stepInfo: StepInfo = getLastStepInfo(first)
         data.pairs.push(stepInfo)
@@ -154,7 +176,7 @@ export default function TblDivision({ dividend, divisor }: Props) {
                     ))
                   }
                   <td rowSpan={2}>
-                    <TblResult divisor={divisor} quotient={data.quotient} />
+                    <TblResult divisor={divisor} quotient={data.quotient} periodic={data.periodic} />
                   </td>
                 </tr>
 

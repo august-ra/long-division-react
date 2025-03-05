@@ -2,10 +2,11 @@ import { emptyLastStep } from "./types"
 import type { NumberInfo, StepInfo } from "./types"
 
 
-export function fillStepInfo(info: StepInfo, first: number, zeros: number, second: number, quotient: number, output: number) {
+export function fillStepInfo(info: StepInfo, first: number, zeros: number, second: number, quotient: number, periodic: boolean, output: number) {
   setNumberInfo(info.first, first, zeros)
   setNumberInfo(info.second!, second)
   info.quotient = quotient
+  info.periodic = periodic
   info.output   = output
 }
 
