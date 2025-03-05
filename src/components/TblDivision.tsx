@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 
 import { fillStepInfo, getLastStepInfo } from "../utils/info"
 import { emptyNumber } from "../utils/types"
-import type { IOperationData, StepInfo } from "../utils/types"
+import type { IOperationData, NumberInfo, StepInfo } from "../utils/types"
 
 
 interface Props {
@@ -132,9 +132,110 @@ export default function TblDivision({ dividend, divisor }: Props) {
   if (data.quotient === "")
     return null
 
+  let previous: NumberInfo | null = null
+  let offset:   number            = 0
+
+  const str0:  string = String(dividend)
+
   return (
-    <div>
-      test
-    </div>
+    <table className="division">
+      <tbody>
+        <tr>
+          <td>
+            <table>
+              <tbody>
+                {
+                  data.pairs.map((pair: StepInfo, level: number) => {
+                    const first:  NumberInfo        = pair.first
+                    const second: NumberInfo | null = pair.second
+
+                    const zeros: string = "0".repeat(first.zeros)
+                    const str1:  string = String(first.value)
+                    const str2:  string = second ? first.value === second.value ? str1 : String(second.value) : ""
+
+                    const offset2: number = second ? first.count - second.count : 0
+
+                    previous = first
+
+                    const render1 = (
+                      <tr key={`DP.${level}`}>
+                        {
+                          Array.from({ length: offset }).map((_, index: number) => (
+                            <td key={`DFS.${index}`} />
+                          ))
+                        }
+
+                        {
+                          second
+                            ? (
+                              <td className="minus" rowSpan={2}>&minus;</td>
+                            )
+                            : (
+                              <td />
+                            )
+                        }
+
+                        {
+                          (level === 0 && first.zeros === 0 ? str0 : str1.slice(0, -first.zeros || 100)).split("")
+                            .map((item: string, index: number) => (
+                              <td key={`DFD.${index}`} className="first">{item}</td>
+                            ))
+                        }
+                        {
+                          zeros.split("").map((_, index: number) => (
+                            <td key={`DFZ.${index}`} className="zero">0</td>
+                          ))
+                        }
+                        {
+                          level === 0
+                            ? (
+                              <td>&nbsp;</td>
+                            )
+                            : null
+                        }
+                      </tr>
+                    )
+
+                    const render2 = str2
+                      ? (
+                        <tr key={`DS.${level}`} className="second">
+                          {
+                            Array.from({ length: offset }).map((_, index: number) => (
+                              <td key={`DSS.${index}`} />
+                            ))
+                          }
+
+                          {
+                            Array.from({ length: offset2 }).map((_) => (
+                              <td className="second" />
+                            ))
+                          }
+
+                          {
+                            str2.split("").map((item: string, index:number) => (
+                              <td key={`DSD.${index}`} className="second">{item}</td>
+                            ))
+                          }
+                        </tr>
+                      )
+                      : null
+
+                    const localOffset = previous ? previous.count - String(pair.output).length : 0
+                    offset += localOffset
+
+                    return (
+                      <React.Fragment key={`DP.${level}`}>
+                        { render1 }
+                        { render2 }
+                      </React.Fragment>
+                    )
+                  })
+                }
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   )
 }
