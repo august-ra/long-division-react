@@ -36,8 +36,25 @@ export default function TblDivision({ dividend, divisor }: Props) {
     data.quotient  = ""
     data.periodic  = ""
 
-    if (dividend === 0 || divisor === 0)
+    if (dividend === 0) {
+      const stepInfo: StepInfo = getLastStepInfo(0)
+      data.pairs.push(stepInfo)
+      data.quotient = "0"
+      data.periodic = ""
+
+      update((prev) => ++prev)
+
       return
+    } else if (divisor === 0) {
+      const stepInfo: StepInfo = getLastStepInfo(dividend)
+      data.pairs.push(stepInfo)
+      data.quotient = "undefined"
+      data.periodic = ""
+
+      update((prev) => ++prev)
+
+      return
+    }
 
     let digits: number[] = String(dividend).split("").map(Number)
 
