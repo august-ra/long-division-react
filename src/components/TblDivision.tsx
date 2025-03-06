@@ -188,6 +188,12 @@ export default function TblDivision({ dividend, divisor }: Props) {
       ++step
     }
 
+    if (step >= 1000) {
+      const stepInfo: StepInfo = getLastStepInfo(first)
+      data.pairs.push(stepInfo)
+      data.periodic = ""
+    }
+
     data.quotient = result
 
     update((prev) => ++prev)
