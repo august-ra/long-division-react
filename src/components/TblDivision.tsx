@@ -114,7 +114,26 @@ export default function TblDivision({ dividend, divisor }: Props) {
 
       first = output
 
-      if (digits.length) {
+      if (first === 0 && digits.length) {
+        let isZeros: boolean = true
+
+        for (const digit of digits)
+          if (digit) {
+            isZeros = false
+
+            break
+          }
+
+        if (isZeros) {
+          result += "0".repeat(digits.length)
+
+          const stepInfo: StepInfo = getLastStepInfo(first)
+          data.pairs.push(stepInfo)
+          data.periodic = ""
+
+          break
+        }
+      } else if (digits.length) {
 
       } else if (first === 0) {
         const stepInfo: StepInfo = getLastStepInfo(first)
@@ -163,7 +182,7 @@ export default function TblDivision({ dividend, divisor }: Props) {
   let previous: NumberInfo | null = null
   let offset:   number            = 0
 
-  const str0:  string = String(dividend)
+  const str0: string = String(dividend)
 
   return (
     <table className="division">
@@ -179,7 +198,7 @@ export default function TblDivision({ dividend, divisor }: Props) {
                 <tr>
                   <td>&nbsp;</td>
                   {
-                    Array.from({ length: data.pairs[0].first.count + 1 }).map((_, index: number) => (
+                    Array.from({ length: Math.max(str0.length, data.pairs[0].first.count) + 1 }).map((_, index: number) => (
                       <td key={`DH.${index}`} />
                     ))
                   }

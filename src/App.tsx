@@ -12,9 +12,9 @@ export default function App() {
     console.log(event.target.name, "::", event.target.value)
 
     if (event.target.name === "dividend")
-      setDividend(Number(event.target.value))
+      setDividend(Math.abs(Number(event.target.value)))
     else
-      setDivisor(Number(event.target.value))
+      setDivisor(Math.abs(Number(event.target.value)))
   }
 
   return (
