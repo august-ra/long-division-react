@@ -173,6 +173,7 @@
     text-align: right;
 
     &.head {
+      font-family: Cascadia, monospace;
       font-weight: 600;
       text-wrap: nowrap;
     }
