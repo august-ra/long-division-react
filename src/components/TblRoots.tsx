@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useMemo, useState } from "react"
 
 import type { StepInfo } from "../utils/types"
 
@@ -8,18 +8,47 @@ interface Props {
 }
 
 export default function TblRoots({ pairs }: Props) {
+  const theme = useMemo(() => {
+    const element: HTMLElement = document.querySelector(".start")!
+    const text = getComputedStyle(element).backgroundColor.toLowerCase()
+
+    if (text === "rgb(255, 255, 255)" || text === "#ffffff") // light
+      return {
+        active: {
+          real: "goldenrod",
+          zero: "palegoldenrod",
+        },
+        inactive: {
+          real: "#242424",
+          zero: "silver",
+        },
+      }
+    else
+      return {
+        active: {
+          real: "yellow",
+          zero: "darkkhaki",
+        },
+        inactive: {
+          real: "#ffffffdd",
+          zero: "gray",
+        },
+      }
+  }, [])
+
   const [activeRoot, setActiveRoot] = useState<number>(0)
 
   function toggleActiveRoot(value: number = activeRoot) {
     const element: HTMLElement = document.querySelector(":root")!
-    element.style.setProperty(`--root-${activeRoot}`, "#ffffffdd")
-    element.style.setProperty(`--root-zero-${activeRoot}`, "gray")
+    element.style.setProperty(`--root-${activeRoot}`,      theme.inactive.real)
+    element.style.setProperty(`--root-zero-${activeRoot}`, theme.inactive.zero)
+    console.log(theme)
 
     if (activeRoot === value || value === 0) {
       setActiveRoot(0)
     } else {
-      element.style.setProperty(`--root-${value}`, "yellow")
-      element.style.setProperty(`--root-zero-${value}`, "darkkhaki")
+      element.style.setProperty(`--root-${value}`,      theme.active.real)
+      element.style.setProperty(`--root-zero-${value}`, theme.active.zero)
       setActiveRoot(value)
     }
   }
