@@ -172,6 +172,11 @@
   td {
     text-align: right;
 
+    &.head {
+      font-weight: 600;
+      text-wrap: nowrap;
+    }
+
     &.minus {
       text-align: center;
       vertical-align: middle;

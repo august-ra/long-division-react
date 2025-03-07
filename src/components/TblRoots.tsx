@@ -29,7 +29,7 @@ export default function TblRoots({ pairs }: Props) {
       <tbody>
         <tr>
           <td></td>
-          <td title="digital roots" onClick={() => toggleActiveRoot()}>&nbsp;dr&nbsp;</td>
+          <td className="head" title="digital roots" onClick={() => toggleActiveRoot()}>&nbsp;dr&nbsp;</td>
         </tr>
 
         {

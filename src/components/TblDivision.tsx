@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 
+import TblIndexes from "./TblIndexes"
 import TblResult from "./TblResult"
 import TblRoots from "./TblRoots"
 
@@ -211,6 +212,10 @@ export default function TblDivision({ dividend, divisor }: Props) {
     <table className="division">
       <tbody>
         <tr>
+          <td>
+            <TblIndexes pairs={data.pairs} />
+          </td>
+
           <td>
             <TblRoots pairs={data.pairs} />
           </td>
