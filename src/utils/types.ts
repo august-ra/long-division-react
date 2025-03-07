@@ -46,3 +46,14 @@ export const emptyLastStep: StepInfo = {
   periodic: false,
   output:   0,
 }
+
+
+export interface ColorPair {
+  real: string
+  zero: string
+}
+
+export interface ColorSettings {
+  active:   ColorPair
+  inactive: ColorPair
+}

@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react"
 
-import type { StepInfo } from "../utils/types"
+import type { ColorSettings, StepInfo } from "../utils/types"
 
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function TblRoots({ pairs }: Props) {
-  const theme = useMemo(() => {
+  const theme = useMemo<ColorSettings>(() => {
     const element: HTMLElement = document.querySelector(".start")!
     const text = getComputedStyle(element).backgroundColor.toLowerCase()
 
@@ -42,13 +42,13 @@ export default function TblRoots({ pairs }: Props) {
     const element: HTMLElement = document.querySelector(":root")!
     element.style.setProperty(`--root-${activeRoot}`,      theme.inactive.real)
     element.style.setProperty(`--root-zero-${activeRoot}`, theme.inactive.zero)
-    console.log(theme)
 
     if (activeRoot === value || value === 0) {
       setActiveRoot(0)
     } else {
       element.style.setProperty(`--root-${value}`,      theme.active.real)
       element.style.setProperty(`--root-zero-${value}`, theme.active.zero)
+
       setActiveRoot(value)
     }
   }
