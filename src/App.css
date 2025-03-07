@@ -193,3 +193,81 @@
   position: absolute;
   translate: calc(50% + 1.5px) calc(-100% + 1px);
 }
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --root-1: #213547;
+    --root-2: #213547;
+    --root-3: #213547;
+    --root-4: #213547;
+    --root-5: #213547;
+    --root-6: #213547;
+    --root-7: #213547;
+    --root-8: #213547;
+    --root-9: #213547;
+
+    --root-zero-1: silver;
+    --root-zero-2: silver;
+    --root-zero-3: silver;
+    --root-zero-4: silver;
+    --root-zero-5: silver;
+    --root-zero-6: silver;
+    --root-zero-7: silver;
+    --root-zero-8: silver;
+    --root-zero-9: silver;
+  }
+
+  .start {
+    background: #ffffff;
+
+    input {
+      color: inherit;
+      background: inherit;
+    }
+  }
+
+  .division {
+    color: #213547;
+
+    table {
+      &.digital-roots {
+        td:first-child {
+          color: silver;
+        }
+      }
+
+      &.result {
+        td {
+          border-left: 1px solid #213547;
+
+          &.result {
+            border-top: 1px solid #213547;
+          }
+        }
+
+        .periodic {
+          color: salmon;
+        }
+      }
+    }
+
+    tr.second td:not(.second) {
+      border-bottom: 1px dotted lightgreen;
+    }
+
+    td {
+      &.minus {
+        text-align: center;
+        vertical-align: middle;
+      }
+
+      &.second {
+        border-bottom: 1px solid #213547;
+      }
+    }
+  }
+
+  .dot {
+    color: lightgreen;
+  }
+}
