@@ -9,16 +9,6 @@
   --root-7: #ffffffdd;
   --root-8: #ffffffdd;
   --root-9: #ffffffdd;
-
-  --root-zero-1: gray;
-  --root-zero-2: gray;
-  --root-zero-3: gray;
-  --root-zero-4: gray;
-  --root-zero-5: gray;
-  --root-zero-6: gray;
-  --root-zero-7: gray;
-  --root-zero-8: gray;
-  --root-zero-9: gray;
 }
 
 #root {
@@ -97,42 +87,6 @@
     color: var(--root-9);
   }
 
-  .zero[data-root="1"] {
-    color: var(--root-zero-1);
-  }
-
-  .zero[data-root="2"] {
-    color: var(--root-zero-2);
-  }
-
-  .zero[data-root="3"] {
-    color: var(--root-zero-3);
-  }
-
-  .zero[data-root="4"] {
-    color: var(--root-zero-4);
-  }
-
-  .zero[data-root="5"] {
-    color: var(--root-zero-5);
-  }
-
-  .zero[data-root="6"] {
-    color: var(--root-zero-6);
-  }
-
-  .zero[data-root="7"] {
-    color: var(--root-zero-7);
-  }
-
-  .zero[data-root="8"] {
-    color: var(--root-zero-8);
-  }
-
-  .zero[data-root="9"] {
-    color: var(--root-zero-9);
-  }
-
   table {
     border-spacing: 0;
 
@@ -183,6 +137,10 @@
       vertical-align: middle;
     }
 
+    &.zero {
+      opacity: .6;
+    }
+
     &.second {
       border-bottom: 1px solid #ffffffdd;
     }
@@ -206,16 +164,6 @@
     --root-7: #213547;
     --root-8: #213547;
     --root-9: #213547;
-
-    --root-zero-1: silver;
-    --root-zero-2: silver;
-    --root-zero-3: silver;
-    --root-zero-4: silver;
-    --root-zero-5: silver;
-    --root-zero-6: silver;
-    --root-zero-7: silver;
-    --root-zero-8: silver;
-    --root-zero-9: silver;
   }
 
   .start {

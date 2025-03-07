@@ -14,25 +14,13 @@ export default function TblRoots({ pairs }: Props) {
 
     if (text === "rgb(255, 255, 255)" || text === "#ffffff") // light
       return {
-        active: {
-          real: "goldenrod",
-          zero: "palegoldenrod",
-        },
-        inactive: {
-          real: "#242424",
-          zero: "silver",
-        },
+        active:   "goldenrod",
+        inactive: "#242424",
       }
     else
       return {
-        active: {
-          real: "yellow",
-          zero: "darkkhaki",
-        },
-        inactive: {
-          real: "#ffffffdd",
-          zero: "gray",
-        },
+        active:   "yellow",
+        inactive: "#ffffffdd",
       }
   }, [])
 
@@ -40,14 +28,12 @@ export default function TblRoots({ pairs }: Props) {
 
   function toggleActiveRoot(value: number = activeRoot) {
     const element: HTMLElement = document.querySelector(":root")!
-    element.style.setProperty(`--root-${activeRoot}`,      theme.inactive.real)
-    element.style.setProperty(`--root-zero-${activeRoot}`, theme.inactive.zero)
+    element.style.setProperty(`--root-${activeRoot}`, theme.inactive)
 
     if (activeRoot === value || value === 0) {
       setActiveRoot(0)
     } else {
-      element.style.setProperty(`--root-${value}`,      theme.active.real)
-      element.style.setProperty(`--root-zero-${value}`, theme.active.zero)
+      element.style.setProperty(`--root-${value}`, theme.active)
 
       setActiveRoot(value)
     }
