@@ -209,7 +209,7 @@ export default function TblDivision({ dividend, divisor }: Props) {
   const str0: string = String(dividend)
 
   return (
-    <table className="division">
+    <table className="main">
       <tbody>
         <tr>
           <td>
@@ -221,7 +221,7 @@ export default function TblDivision({ dividend, divisor }: Props) {
           </td>
 
           <td>
-            <table>
+            <table className="division">
               <tbody>
                 <tr>
                   <td>&nbsp;</td>
@@ -241,7 +241,7 @@ export default function TblDivision({ dividend, divisor }: Props) {
                     const second: NumberInfo | null = pair.second
 
                     const zeros: string = "0".repeat(first.zeros)
-                    const str1:  string = String(first.value)
+                    const str1:  string = level === 0 && first.zeros === 0 ? str0 : String(first.value).slice(0, -first.zeros || 100)
                     const str2:  string = second ? first.value === second.value ? str1 : String(second.value) : ""
 
                     const offset2: number = second ? first.count - second.count : 0
@@ -266,33 +266,21 @@ export default function TblDivision({ dividend, divisor }: Props) {
                             )
                         }
 
-                        {
-                          (level === 0 && first.zeros === 0 ? str0 : str1.slice(0, -first.zeros || 100)).split("")
-                            .map((item: string, index: number, array: string[]) => (
-                              level === 0 && index === array.length - 1 && zeros
-                                ? (
-                                  <td key={`DFD.${index}`} className="first" data-root={`${first.root}`}>
-                                    {item}
-                                    <div className="dot">.</div>
-                                  </td>
-                                )
-                                : (
-                                  <td key={`DFD.${index}`} className="first" data-root={`${first.root}`}>{item}</td>
-                                )
-                            ))
-                        }
-                        {
-                          zeros.split("").map((_, index: number) => (
-                            <td key={`DFZ.${index}`} className="zero" data-root={`${first.root}`}>0</td>
-                          ))
-                        }
-                        {
-                          level === 0
-                            ? (
-                              <td>&nbsp;</td>
-                            )
-                            : null
-                        }
+                        <td key={`DFD.${level}`} colSpan={first.count + 1} data-root={`${first.root}`}>
+                          {
+                            level === 0 && zeros
+                              ? (
+                                <>
+                                  {str1}<div className="dot">.</div><span className="zero">{zeros}</span>
+                                </>
+                              )
+                              : (
+                                <>
+                                  {str1}<span className="zero">{zeros}</span>
+                                </>
+                              )
+                          }
+                        </td>
                       </tr>
                     )
 
@@ -311,11 +299,9 @@ export default function TblDivision({ dividend, divisor }: Props) {
                             ))
                           }
 
-                          {
-                            str2.split("").map((item: string, index:number) => (
-                              <td key={`DSD.${index}`} className="second" data-root={`${second!.root}`}>{item}</td>
-                            ))
-                          }
+                          <td key={`DSD.${level}`} className="second" colSpan={second!.count} data-root={`${second!.root}`}>
+                            <span>{str2}</span>
+                          </td>
                         </tr>
                       )
                       : null

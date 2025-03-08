@@ -9,7 +9,7 @@ interface Props {
 
 export default function TblIndexes({ pairs }: Props) {
   return (
-    <table>
+    <table className="indexes">
       <tbody>
         <tr>
           <td className="head">№ п/п</td>

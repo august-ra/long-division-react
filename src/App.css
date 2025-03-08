@@ -40,7 +40,7 @@
   height: 41px;
 }
 
-.division {
+.main {
   margin: 8px auto;
   border-collapse: separate;
   border-spacing: 16px 0;
@@ -90,6 +90,10 @@
   table {
     border-spacing: 0;
 
+    &.indexes td {
+      text-align: right;
+    }
+
     &.digital-roots {
       td:first-child {
         color: gray;
@@ -97,6 +101,18 @@
 
       td:last-child {
         text-align: center;
+      }
+    }
+
+    &.division {
+      td:not(.minus) {
+        text-align: left;
+        letter-spacing: 2px;
+      }
+
+      td.second span {
+        display: inline-block;
+        margin-right: -2px;
       }
     }
 
@@ -124,8 +140,6 @@
   }
 
   td {
-    text-align: right;
-
     &.head {
       font-family: Cascadia, monospace;
       font-weight: 600;
@@ -137,7 +151,7 @@
       vertical-align: middle;
     }
 
-    &.zero {
+    & span.zero {
       opacity: .6;
     }
 
@@ -150,7 +164,7 @@
 .dot {
   color: green;
   position: absolute;
-  translate: calc(50% + 1.5px) calc(-100% + 1px);
+  translate: calc(50% + .5px) calc(-100% + .5px);
 }
 
 @media (prefers-color-scheme: light) {
