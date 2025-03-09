@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 
 import TblIndexes from "./TblIndexes"
 import TblResult from "./TblResult"
@@ -21,9 +21,20 @@ export default function TblDivision({ dividend, divisor }: Props) {
     results:   {},
     quotient:  "",
     periodic:  "",
+    cellWidth: "",
   })
 
   const [mark, update] = useState<number>(0)
+
+  useEffect(() => {
+    if (data.cellWidth)
+      return
+
+    const element: Element | null = document.querySelector("td.cnt")
+
+    if (element)
+      data.cellWidth = getComputedStyle(element).width
+  })
 
   useEffect(() => {
     const op = `${dividend}/${divisor}`
@@ -199,6 +210,20 @@ export default function TblDivision({ dividend, divisor }: Props) {
 
     update((prev) => ++prev)
   }, [dividend, divisor])
+
+  const fillVars = useCallback(function () {
+    const element: HTMLElement = document.querySelector(":root")!
+
+    if (data.cellWidth)
+      element.style.setProperty("--width", data.cellWidth)
+
+    if (data.pairs.length) {
+      const first = data.pairs[0].first
+      element.style.setProperty("--count", `${first.count - first.zeros}`)
+    }
+  }, [data.cellWidth, data.pairs])
+
+  fillVars()
 
   if (data.quotient === "")
     return null

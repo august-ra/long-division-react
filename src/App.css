@@ -9,6 +9,9 @@
   --root-7: #ffffffdd;
   --root-8: #ffffffdd;
   --root-9: #ffffffdd;
+
+  --width: 10px;
+  --count: 1;
 }
 
 #root {
@@ -146,6 +149,11 @@
       text-wrap: nowrap;
     }
 
+    &.null, &.minus {
+      max-width: var(--width);
+      width: var(--width);
+    }
+
     &.minus {
       text-align: center;
       vertical-align: middle;
@@ -164,7 +172,8 @@
 .dot {
   color: green;
   position: absolute;
-  translate: calc(50% + .5px) calc(-100% + .5px);
+  left: calc(var(--width) * var(--count));
+  translate: calc(-50% + 1.5px) calc(-100% + .5px);
 }
 
 @media (prefers-color-scheme: light) {

@@ -5,6 +5,7 @@ export interface IOperationData {
   results:   Record<number, number>
   quotient:  string
   periodic:  string
+  cellWidth: string
 }
 
 
