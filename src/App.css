@@ -144,7 +144,10 @@
 
     &.cell {
       letter-spacing: 2px;
-      user-select: none;
+
+      &:not(.number) {
+        user-select: none;
+      }
     }
 
     &.dotted {
