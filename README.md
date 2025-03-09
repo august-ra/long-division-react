@@ -1,6 +1,10 @@
-# React + TypeScript + Vite
+# Long Division
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The project draws division with two digits (dividend on divisor) and finds a result of operation.
+The result could be integer or float/real value or value with a periodic part after a delimiter.
+
+It uses template `React + TypeScript + Vite`.\
+The template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
 
@@ -53,3 +57,17 @@ export default tseslint.config({
   },
 })
 ```
+
+## Available Scripts
+
+In the project directory, you can run:
+
+#### `npm run dev`
+
+It runs the app in the development mode.\
+Open [http://localhost:5173](http://localhost:5173) (or some different port if it's busy) to view it in the browser.
+
+#### `npm run build`
+
+It builds the app for production to the `dist` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
