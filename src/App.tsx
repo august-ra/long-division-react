@@ -19,7 +19,7 @@ export default function App() {
 
   return (
     <>
-      <div className="start">
+      <div className="header">
         Введите целое делимое <input type="number" name="dividend" value={dividend} onInput={changeNumber} /> и целый делитель <input type="number" name="divisor" value={divisor} onInput={changeNumber} /> для показа деления в столбик.
       </div>
 

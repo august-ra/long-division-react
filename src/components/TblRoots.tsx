@@ -9,7 +9,7 @@ interface Props {
 
 export default function TblRoots({ pairs }: Props) {
   const theme = useMemo<ColorSettings>(() => {
-    const element: HTMLElement = document.querySelector(".start")!
+    const element: HTMLElement = document.querySelector(".header")!
     const text = getComputedStyle(element).backgroundColor.toLowerCase()
 
     if (text === "rgb(255, 255, 255)" || text === "#ffffff") // light
