@@ -17,7 +17,7 @@ function TblResult({ divisor, quotient, periodic }: Props) {
     const title:  string = `${length} ${calcUnits(length, "цифр", "цифра", "цифры")} => ∑${sum} => dr ${root}`
 
     if (periodic)
-      return quotient.replace(periodic, `(<span class="periodic" title="${title}" data-root="${root}">${periodic}</span>)`)
+      return `${quotient.slice(0, quotient.length - periodic.length)}(<span class="periodic" title="${title}" data-root="${root}">${periodic}</span>)`
     else
       return quotient
   })()
@@ -26,7 +26,7 @@ function TblResult({ divisor, quotient, periodic }: Props) {
     <table className="result">
       <tbody>
       <tr>
-        <td data-root={`${calcDigitalRoot(divisor)}`}>{divisor}</td>
+        <td className="cell" data-root={`${calcDigitalRoot(divisor)}`}>{divisor}</td>
       </tr>
       <tr>
         <td className="result" dangerouslySetInnerHTML={{ __html: result }} />

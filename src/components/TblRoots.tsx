@@ -52,7 +52,7 @@ export default function TblRoots({ pairs }: Props) {
             return (
               <React.Fragment key={index}>
                 <tr onClick={() => toggleActiveRoot(pair.first.root)}>
-                  <td>{pair.first.count}</td>
+                  <td className="cnt">{pair.first.count}</td>
                   <td data-root={`${pair.first.root}`}>{pair.first.root}</td>
                 </tr>
 

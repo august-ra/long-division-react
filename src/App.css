@@ -117,28 +117,15 @@
       }
     }
 
-    &.division {
-      td:not(.minus) {
-        text-align: left;
-        letter-spacing: 2px;
-      }
-
-      td.second span {
-        display: inline-block;
-        margin-right: -2px;
-      }
-    }
-
     &.result {
       position: absolute;
 
       td {
-        text-align: left;
+        text-wrap: nowrap;
         border-left: 1px solid #ffffffdd;
 
         &.result {
           border-top: 1px solid #ffffffdd;
-          text-wrap: nowrap;
 
           .periodic {
             color: lightsalmon;
@@ -148,10 +135,6 @@
     }
   }
 
-  tr.second td:not(.second) {
-    border-bottom: 1px dotted darkgreen;
-  }
-
   td {
     &.head {
       font-family: Cascadia, monospace;
@@ -159,7 +142,17 @@
       text-wrap: nowrap;
     }
 
-    &.null, &.minus {
+    &.cell {
+      letter-spacing: 2px;
+      user-select: none;
+    }
+
+    &.dotted {
+      position: relative;
+      text-wrap: nowrap;
+    }
+
+    &.cell, &.minus {
       max-width: var(--width);
       width: var(--width);
     }
@@ -171,6 +164,10 @@
 
     & span.zero {
       opacity: .6;
+    }
+
+    &.bordered {
+      border-bottom: 1px dotted darkgreen;
     }
 
     &.second {
@@ -233,14 +230,14 @@
       }
     }
 
-    tr.second td:not(.second) {
-      border-bottom: 1px dotted lightgreen;
-    }
-
     td {
       &.minus {
         text-align: center;
         vertical-align: middle;
+      }
+
+      &.bordered {
+        border-bottom: 1px dotted lightgreen;
       }
 
       &.second {

@@ -228,9 +228,13 @@ export default function TblDivision({ dividend, divisor }: Props) {
   if (data.quotient === "")
     return null
 
-  let previous: NumberInfo | null = null
-  let offset:   number            = 0
+  let offset: number = 0
+  let width: number = data.pairs.reduce((acc: number, pair: StepInfo) => {
+    const localOffset: number = pair.output === 0 ? pair.first.count : pair.first.count - String(pair.output).length
+    acc += localOffset
 
+    return acc
+  }, 0)
   const str0: string = String(dividend)
 
   return (
@@ -246,13 +250,13 @@ export default function TblDivision({ dividend, divisor }: Props) {
           </td>
 
           <td>
-            <table className="division">
+            <table>
               <tbody>
                 <tr>
-                  <td>&nbsp;</td>
+                  <td className="cell">&nbsp;</td>
                   {
                     Array.from({ length: Math.max(str0.length, data.pairs[0].first.count) + 1 }).map((_, index: number) => (
-                      <td key={`DH.${index}`} />
+                      <td key={`DH.${index}`} className="cell">&nbsp;</td>
                     ))
                   }
                   <td rowSpan={2}>
@@ -267,71 +271,78 @@ export default function TblDivision({ dividend, divisor }: Props) {
 
                     const zeros: string = "0".repeat(first.zeros)
                     const str1:  string = level === 0 && first.zeros === 0 ? str0 : String(first.value).slice(0, -first.zeros || 100)
-                    const str2:  string = second ? first.value === second.value ? str1 : String(second.value) : ""
+                    const str2:  string = second ? String(second.value) : ""
+
+                    if (!first.value && !second)
+                      --offset
 
                     const offset2: number = second ? first.count - second.count : 0
 
-                    previous = first
+                    function getSecondClass(index: number) {
+                      if (index < offset)
+                        return "bordered cell"
+                      else if (index >= offset && index < offset + offset2 + str2.length)
+                        return "bordered second cell"
+                      else
+                        return "cell"
+                    }
 
                     const render1 = (
-                      <tr key={`DP.${level}`}>
+                      <tr key={`DF.${level}`}>
                         {
-                          Array.from({ length: offset }).map((_, index: number) => (
-                            <td key={`DFS.${index}`} />
-                          ))
-                        }
-
-                        {
-                          second
-                            ? (
-                              <td className="minus" rowSpan={2}>&minus;</td>
-                            )
-                            : (
-                              <td />
-                            )
-                        }
-
-                        <td key={`DFD.${level}`} colSpan={first.count + 1} data-root={`${first.root}`}>
-                          {
-                            level === 0 && zeros
+                          Array.from({ length: width + 1 }).map((_, index: number) => (
+                            index === offset + 1
+                              ? (() => {
+                                if (level === 0 && zeros)
+                                  return (
+                                    <td className="cell dotted">
+                                      {str1}<div className="dot">.</div><span className="zero">{zeros}</span>
+                                    </td>
+                                  )
+                                else if (zeros)
+                                  return (
+                                    <td className="cell">
+                                      {str1}<span className="zero">{zeros}</span>
+                                    </td>
+                                  )
+                                else
+                                  return (
+                                    <td className="cell">
+                                      {str1}
+                                    </td>
+                                  )
+                              })()
+                            : index === offset && second
                               ? (
-                                <>
-                                  {str1}<div className="dot">.</div><span className="zero">{zeros}</span>
-                                </>
+                                <td key={`DFC.${index}`} rowSpan={2} className="minus cell"><span>&minus;</span></td>
                               )
                               : (
-                                <>
-                                  {str1}<span className="zero">{zeros}</span>
-                                </>
+                                <td key={`DFC.${index}`} className="cell">&nbsp;</td>
                               )
-                          }
-                        </td>
+                          ))
+                        }
                       </tr>
                     )
 
                     const render2 = str2
                       ? (
-                        <tr key={`DS.${level}`} className="second">
+                        <tr key={`DS.${level}`}>
                           {
-                            Array.from({ length: offset }).map((_, index: number) => (
-                              <td key={`DSS.${index}`} />
+                            Array.from({ length: width }).map((_, index: number) => (
+                              index === offset + offset2
+                                ? (
+                                  <td key={`DSC.${index}`} className={getSecondClass(index)}>{str2}</td>
+                                )
+                                : (
+                                  <td key={`DSC.${index}`} className={getSecondClass(index)}>&nbsp;</td>
+                                )
                             ))
                           }
-
-                          {
-                            Array.from({ length: offset2 }).map((_, index: number) => (
-                              <td key={`DSZ.${index}`} className="second" />
-                            ))
-                          }
-
-                          <td key={`DSD.${level}`} className="second" colSpan={second!.count} data-root={`${second!.root}`}>
-                            <span>{str2}</span>
-                          </td>
                         </tr>
                       )
                       : null
 
-                    const localOffset = previous ? previous.count - String(pair.output).length : 0
+                    const localOffset: number = pair.output === 0 ? first.count : first.count - String(pair.output).length
                     offset += localOffset
 
                     return (

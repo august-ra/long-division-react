@@ -20,7 +20,7 @@ export default function TblIndexes({ pairs }: Props) {
               ? (
                 <React.Fragment key={`DI.${index}`}>
                   <tr>
-                    <td>{index + 1}.</td>
+                    <td>{`${index + 1}.`}</td>
                   </tr>
                   <tr>
                     <td className="second">&nbsp;</td>
