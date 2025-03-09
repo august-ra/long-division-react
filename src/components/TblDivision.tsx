@@ -24,7 +24,7 @@ export default function TblDivision({ dividend, divisor }: Props) {
     cellWidth: "",
   })
 
-  const [mark, update] = useState<number>(0)
+  const [_, update] = useState<number>(0)
 
   useEffect(() => {
     if (data.cellWidth)

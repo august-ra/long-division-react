@@ -59,7 +59,7 @@ export default function TblRoots({ pairs }: Props) {
                 {
                   pair.second
                     && (
-                      <tr onClick={() => toggleActiveRoot(pair.second.root)}>
+                      <tr onClick={() => toggleActiveRoot(pair.second!.root)}>
                         <td className="second">{pair.second.count}</td>
                         <td className="second" data-root={`${pair.second.root}`}>{pair.second.root}</td>
                       </tr>
