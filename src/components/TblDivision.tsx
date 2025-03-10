@@ -88,6 +88,8 @@ export default function TblDivision({ dividend, divisor }: Props) {
         quotient: 1,
         periodic: false,
         output:   0,
+        offset1:  0,
+        offset2:  0,
       }
 
       let zeros: number = -1
@@ -208,6 +210,23 @@ export default function TblDivision({ dividend, divisor }: Props) {
 
     data.quotient = result
 
+    // +++++ getting offsets
+    let offset1: number = 0
+
+    for (const pair of data.pairs) {
+      if (!pair.first.value && !pair.second)
+        --offset1
+
+      const offset2: number = pair.second ? pair.first.count - pair.second.count : 0
+
+      pair.offset1 = offset1
+      pair.offset2 = offset2
+
+      const localOffset: number = pair.output === 0 ? pair.first.count : pair.first.count - String(pair.output).length
+      offset1 += localOffset
+    }
+    // -----
+
     update((prev) => ++prev)
   }, [dividend, divisor])
 
@@ -228,7 +247,6 @@ export default function TblDivision({ dividend, divisor }: Props) {
   if (data.quotient === "")
     return null
 
-  let offset: number = 0
   let width: number = data.pairs.reduce((acc: number, pair: StepInfo) => {
     const localOffset: number = pair.output === 0 ? pair.first.count : pair.first.count - String(pair.output).length
     acc += localOffset
@@ -271,18 +289,12 @@ export default function TblDivision({ dividend, divisor }: Props) {
                     const second: NumberInfo | null = pair.second
 
                     const zeros: string = "0".repeat(first.zeros)
-                    const str1:  string = level === 0 && first.zeros === 0 ? str0 : String(first.value).slice(0, -first.zeros || 100)
-                    const str2:  string = second ? String(second.value) : ""
-
-                    if (!first.value && !second)
-                      --offset
-
-                    const offset2: number = second ? first.count - second.count : 0
+                    const str1:  string = level === 0 && first.zeros === 0 ? str0 : first.text.slice(0, -first.zeros || 100)
 
                     function getSecondClass(index: number) {
-                      if (index < offset)
+                      if (index < pair.offset1)
                         return "bordered cell"
-                      else if (index >= offset && index < offset + offset2 + str2.length)
+                      else if (index >= pair.offset1 && index < pair.offset1 + pair.offset2 + pair.second!.count)
                         return "bordered second cell"
                       else
                         return "cell"
@@ -292,15 +304,15 @@ export default function TblDivision({ dividend, divisor }: Props) {
                       <tr key={`DF.${level}`}>
                         {
                           Array.from({ length: width + 1 }).map((_, index: number) => (
-                            index === offset + 1
+                            index === pair.offset1 + 1
                               ? (() => {
-                                if (level === 0 && zeros)
+                                if (level === 0 && pair.first.zeros)
                                   return (
                                     <td className="number dotted cell" data-root={`${first.root}`}>
                                       {str1}<div className="dot">.</div><span className="zero">{zeros}</span>
                                     </td>
                                   )
-                                else if (zeros)
+                                else if (pair.first.zeros)
                                   return (
                                     <td className="number cell" data-root={`${first.root}`}>
                                       {str1}<span className="zero">{zeros}</span>
@@ -313,7 +325,7 @@ export default function TblDivision({ dividend, divisor }: Props) {
                                     </td>
                                   )
                               })()
-                            : index === offset && second
+                            : index === pair.offset1 && second
                               ? (
                                 <td key={`DFC.${index}`} className="minus cell" rowSpan={2}><span>&minus;</span></td>
                               )
@@ -325,14 +337,14 @@ export default function TblDivision({ dividend, divisor }: Props) {
                       </tr>
                     )
 
-                    const render2 = str2
+                    const render2 = pair.second
                       ? (
                         <tr key={`DS.${level}`}>
                           {
                             Array.from({ length: width }).map((_, index: number) => (
-                              index === offset + offset2
+                              index === pair.offset1 + pair.offset2
                                 ? (
-                                  <td key={`DSC.${index}`} className={`number ${getSecondClass(index)}`} data-root={`${second!.root}`}>{str2}</td>
+                                  <td key={`DSC.${index}`} className={`number ${getSecondClass(index)}`} data-root={`${second!.root}`}>{pair.second!.text}</td>
                                 )
                                 : (
                                   <td key={`DSC.${index}`} className={getSecondClass(index)}>&nbsp;</td>
@@ -342,9 +354,6 @@ export default function TblDivision({ dividend, divisor }: Props) {
                         </tr>
                       )
                       : null
-
-                    const localOffset: number = pair.output === 0 ? first.count : first.count - String(pair.output).length
-                    offset += localOffset
 
                     return (
                       <React.Fragment key={`DP.${level}`}>

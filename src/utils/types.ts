@@ -14,6 +14,7 @@ export interface NumberInfo {
   zeros: number
   root:  number
   count: number
+  text:  string
 }
 
 export interface StepInfo {
@@ -22,6 +23,8 @@ export interface StepInfo {
   quotient: number
   periodic: boolean
   output:   number
+  offset1:  number
+  offset2:  number
 }
 
 
@@ -30,6 +33,7 @@ export const emptyNumber: NumberInfo = {
   zeros: 0,
   root:  0,
   count: 0,
+  text:  "",
 }
 
 export const emptyUsualStep: StepInfo = {
@@ -38,6 +42,8 @@ export const emptyUsualStep: StepInfo = {
   quotient: 0,
   periodic: false,
   output:   0,
+  offset1:  0,
+  offset2:  0,
 }
 
 export const emptyLastStep: StepInfo = {
@@ -46,6 +52,8 @@ export const emptyLastStep: StepInfo = {
   quotient: 0,
   periodic: false,
   output:   0,
+  offset1:  0,
+  offset2:  0,
 }
 
 

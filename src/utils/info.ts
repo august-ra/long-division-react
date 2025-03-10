@@ -8,6 +8,8 @@ export function fillStepInfo(info: StepInfo, first: number, zeros: number, secon
   info.quotient = quotient
   info.periodic = periodic
   info.output   = output
+  info.offset1  = 0
+  info.offset2  = 0
 }
 
 export function getLastStepInfo(first: number): StepInfo {
@@ -22,6 +24,7 @@ export function setNumberInfo(info: NumberInfo, value: number, zeros: number = 0
   info.zeros = zeros
   info.root  = calcDigitalRoot(value)
   info.count = String(value).length
+  info.text  = String(value)
 }
 
 
