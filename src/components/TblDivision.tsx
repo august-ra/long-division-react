@@ -235,6 +235,7 @@ export default function TblDivision({ dividend, divisor }: Props) {
 
     return acc
   }, 0)
+
   const str0: string = String(dividend)
 
   return (
@@ -295,26 +296,26 @@ export default function TblDivision({ dividend, divisor }: Props) {
                               ? (() => {
                                 if (level === 0 && zeros)
                                   return (
-                                    <td className="number dotted cell">
+                                    <td className="number dotted cell" data-root={`${first.root}`}>
                                       {str1}<div className="dot">.</div><span className="zero">{zeros}</span>
                                     </td>
                                   )
                                 else if (zeros)
                                   return (
-                                    <td className="number cell">
+                                    <td className="number cell" data-root={`${first.root}`}>
                                       {str1}<span className="zero">{zeros}</span>
                                     </td>
                                   )
                                 else
                                   return (
-                                    <td className="number cell">
+                                    <td className="number cell" data-root={`${first.root}`}>
                                       {str1}
                                     </td>
                                   )
                               })()
                             : index === offset && second
                               ? (
-                                <td key={`DFC.${index}`} rowSpan={2} className="minus cell"><span>&minus;</span></td>
+                                <td key={`DFC.${index}`} className="minus cell" rowSpan={2}><span>&minus;</span></td>
                               )
                               : (
                                 <td key={`DFC.${index}`} className="cell">&nbsp;</td>
@@ -331,7 +332,7 @@ export default function TblDivision({ dividend, divisor }: Props) {
                             Array.from({ length: width }).map((_, index: number) => (
                               index === offset + offset2
                                 ? (
-                                  <td key={`DSC.${index}`} className={`number ${getSecondClass(index)}`}>{str2}</td>
+                                  <td key={`DSC.${index}`} className={`number ${getSecondClass(index)}`} data-root={`${second!.root}`}>{str2}</td>
                                 )
                                 : (
                                   <td key={`DSC.${index}`} className={getSecondClass(index)}>&nbsp;</td>
