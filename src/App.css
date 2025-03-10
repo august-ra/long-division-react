@@ -199,16 +199,20 @@
     --root-9: #213547;
   }
 
-  .start {
+  .header {
     background: #ffffff;
 
     input {
       color: inherit;
       background: inherit;
     }
+
+    &::-webkit-scrollbar-thumb {
+      background: lightgreen;
+    }
   }
 
-  .division {
+  .main {
     color: #213547;
 
     table {
@@ -220,31 +224,26 @@
 
       &.result {
         td {
-          border-left: 1px solid #213547;
+          border-left-color: #213547;
 
           &.result {
-            border-top: 1px solid #213547;
-          }
-        }
+            border-top-color: #213547;
 
-        .periodic {
-          color: salmon;
+            .periodic {
+              color: salmon;
+            }
+          }
         }
       }
     }
 
     td {
-      &.minus {
-        text-align: center;
-        vertical-align: middle;
-      }
-
       &.bordered {
-        border-bottom: 1px dotted lightgreen;
+        border-bottom-color: lightgreen;
       }
 
       &.second {
-        border-bottom: 1px solid #213547;
+        border-bottom-color: #213547;
       }
     }
   }
